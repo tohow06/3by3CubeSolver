@@ -3,6 +3,7 @@ from tkinter.font import Font
 from rubik_solver import utils
 import pycuber as pc
 from pycuber.solver import CFOPSolver
+import os
 
 
 # 步驟二：建立主視窗。
@@ -128,49 +129,8 @@ def rando():
 
 def rota():
 	global doList
-	for mo in doList:
-		if mo=='R':
-			rotate(R,1)
-		if mo=="R'":
-			rotate(R,0)
-		if mo=='R2':
-			rotate(R,1)
-			rotate(R,1)
-		if mo=='U':
-			rotate(U,1)
-		if mo=="U'":
-			rotate(U,0)
-		if mo=='U2':
-			rotate(U,1)
-			rotate(U,1)				
-		if mo=='L':
-			rotate(L,1)
-		if mo=="L'":
-			rotate(L,0)
-		if mo=='L2':
-			rotate(L,1)
-			rotate(L,1)				
-		if mo=='D':
-			rotate(D,1)
-		if mo=="D'":
-			rotate(D,0)
-		if mo=='D2':
-			rotate(D,1)
-			rotate(D,1)				
-		if mo=='F':
-			rotate(F,1)
-		if mo=="F'":
-			rotate(F,0)
-		if mo=='F2':
-			rotate(F,1)
-			rotate(F,1)				
-		if mo=='B':
-			rotate(B,1)
-		if mo=="B'":
-			rotate(B,0)
-		if mo=='B2':
-			rotate(B,1)
-			rotate(B,1)
+	str1 = ' '.join(str(e) for e in doList)
+	os.system('python testrotate.py "%s"' %(str1))
 	print("~~~~~~~~~~~move complete ~~~~~~~~~~~")							
 																										
 
@@ -186,7 +146,6 @@ solran.place(x=650,y=550)
 
 rot=tk.Button(mainWin,text="rotate",font=myfont,command=rota)
 rot.pack(side='bottom')
-
 
 
 
