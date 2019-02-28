@@ -68,6 +68,14 @@ for i in range(45,54):
 	cans[i].place(x=(i%3+3)*50,y=(int(i/3)-9)*50)
 	cans[i].bind("<Button-1>", change)	
 
+cans[4].config(bg="yellow")
+cans[13].config(bg="blue")
+cans[22].config(bg="red")
+cans[31].config(bg="green")
+cans[40].config(bg="orange")
+cans[49].config(bg="white")
+
+
 
 
 def changeMouse(k):
