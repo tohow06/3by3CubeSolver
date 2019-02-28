@@ -22,8 +22,8 @@ firmata.reset()
 
 def rotate(face,clock):
     firmata.stepper_config(stepPerRevolution , face)
-    firmata.stepper_step(rpm,(right*clock))
     time.sleep(.5)
+    firmata.stepper_step(rpm,(right*clock))
     print("ro")
 
 for mo in doList:

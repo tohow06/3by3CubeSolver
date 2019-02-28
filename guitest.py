@@ -131,8 +131,17 @@ def rota():
 	global doList
 	str1 = ' '.join(str(e) for e in doList)
 	os.system('python testrotate.py "%s"' %(str1))
-	print("~~~~~~~~~~~move complete ~~~~~~~~~~~")							
-																										
+	print("~~~~~~~~~~~move complete ~~~~~~~~~~~")
+
+def solra():
+	global doList
+	str1 = ' '.join(str(e) for e in doList)
+	c=pc.Cube()								
+	c(str1)
+	solver=CFOPSolver(c)
+	doList=convertForToList(solver.solve())
+	var.set(doList)
+
 
 
 
@@ -141,7 +150,7 @@ solcol.place(x=150,y=550)
 
 ran=tk.Button(mainWin,text="random",font=myfont,command=rando)
 ran.place(x=450,y=550)
-solran = tk.Button(mainWin,text="solve random",font=myfont)
+solran = tk.Button(mainWin,text="solve random",font=myfont,command=solra)
 solran.place(x=650,y=550)
 
 rot=tk.Button(mainWin,text="rotate",font=myfont,command=rota)
