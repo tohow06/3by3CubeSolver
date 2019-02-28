@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter.font import Font
+from rubik_solver import utils
+
 # 步驟二：建立主視窗。
 mainWin = tk.Tk()
 # 視窗標題
@@ -8,6 +10,7 @@ mainWin.title("Cube Robot")
 
 
 mainWin.geometry("1024x768")
+mainWin.config(bg='#DCDCDC')
 
 
 
@@ -17,9 +20,10 @@ cans=[]
 panel=[]
 boxsize=50
 color=['yellow','red','green','orange','blue','white']
-ctext=['Y','R','G','O','B','W']
+ctext=['y','r','g','o','b','w']
 fsize=Font(size=20)
 myfont=Font(size=35)
+ansList=[]
 
 def change(event):
 	global mouseColor
@@ -68,23 +72,34 @@ for i in range(45,54):
 
 def changeMouse(k):
 	global	mouseColor
-	mouseColor=panel[k]['text']
+	mouseColor=color[k]
 
 
-panel.append(tk.Button(mainWin,text=color[0],font=(fsize),width=5,command=lambda:changeMouse(0)))
-panel.append(tk.Button(mainWin,text=color[1],font=(fsize),width=5,command=lambda:changeMouse(1)))
-panel.append(tk.Button(mainWin,text=color[2],font=(fsize),width=5,command=lambda:changeMouse(2)))
-panel.append(tk.Button(mainWin,text=color[3],font=(fsize),width=5,command=lambda:changeMouse(3)))
-panel.append(tk.Button(mainWin,text=color[4],font=(fsize),width=5,command=lambda:changeMouse(4)))
-panel.append(tk.Button(mainWin,text=color[5],font=(fsize),width=5,command=lambda:changeMouse(5)))
+panel.append(tk.Button(mainWin,text=ctext[0],font=(fsize),width=5,command=lambda:changeMouse(0)))
+panel.append(tk.Button(mainWin,text=ctext[1],font=(fsize),width=5,command=lambda:changeMouse(1)))
+panel.append(tk.Button(mainWin,text=ctext[2],font=(fsize),width=5,command=lambda:changeMouse(2)))
+panel.append(tk.Button(mainWin,text=ctext[3],font=(fsize),width=5,command=lambda:changeMouse(3)))
+panel.append(tk.Button(mainWin,text=ctext[4],font=(fsize),width=5,command=lambda:changeMouse(4)))
+panel.append(tk.Button(mainWin,text=ctext[5],font=(fsize),width=5,command=lambda:changeMouse(5)))
 for i in range(6):
 	panel[i].place(x=330+i*75,y=400)
 
 
-var=""
-texting=tk.Label(mainWin,textvariable=var,font=myfont,bg="#DDDDDD")
-texting.pack(side='bottom')
+var=tk.StringVar()
 
+cubeColor=""
+
+def solco():
+	global cubeColor
+	global ansList
+	for c in cans:
+		cubeColor=cubeColor+c['bg'][0]	
+	print(cubeColor)
+	ansList=utils.solve(cubeColor,'Kociemba')
+	var.set(ansList)
+	print(ansList)
+texting=tk.Label(mainWin,textvariable=var,font=myfont,bg="#C0C0C0")
+texting.pack(side='bottom')
 
 
 
