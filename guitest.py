@@ -1,6 +1,9 @@
 import tkinter as tk
 from tkinter.font import Font
 from rubik_solver import utils
+import pycuber as pc
+from pycuber.solver import CFOPSolver
+
 
 # 步驟二：建立主視窗。
 mainWin = tk.Tk()
@@ -23,7 +26,7 @@ color=['yellow','red','green','orange','blue','white']
 ctext=['y','r','g','o','b','w']
 fsize=Font(size=20)
 myfont=Font(size=35)
-ansList=[]
+doList=[]
 
 def change(event):
 	global mouseColor
@@ -76,8 +79,6 @@ cans[40].config(bg="orange")
 cans[49].config(bg="white")
 
 
-
-
 def changeMouse(k):
 	global	mouseColor
 	mouseColor=color[k]
@@ -99,22 +100,35 @@ cubeColor=""
 
 def solco():
 	global cubeColor
-	global ansList
+	global doList
 	for c in cans:
 		cubeColor=cubeColor+c['bg'][0]	
 	print(cubeColor)
-	ansList=utils.solve(cubeColor,'Kociemba')
-	var.set(ansList)
-	print(ansList)
+	doList=utils.solve(cubeColor,'Kociemba')
+	doList=list(map(str,doList))
+	var.set(doList)
+	print(doList)
+
 texting=tk.Label(mainWin,textvariable=var,font=myfont,bg="#C0C0C0")
 texting.pack(side='bottom')
 
+def convertForToList(f):
+	l=str(f).split(' ')
+	return l
+
+
+def rando():
+	global doList
+	random_alg = pc.Formula().random()
+	var.set(random_alg)
+	doList=convertForToList(random_alg)
+	print(doList)
 
 
 solcol = tk.Button(mainWin,text="solve color",font=myfont,command=solco)
 solcol.place(x=150,y=550)
 
-ran=tk.Button(mainWin,text="random",font=myfont)
+ran=tk.Button(mainWin,text="random",font=myfont,command=rando)
 ran.place(x=450,y=550)
 solran = tk.Button(mainWin,text="solve random",font=myfont)
 solran.place(x=650,y=550)
