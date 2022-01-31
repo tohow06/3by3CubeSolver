@@ -97,10 +97,8 @@ for i in range(6):
 
 var=tk.StringVar()
 
-cubeColor=""
-
 def solco():
-	global cubeColor
+	cubeColor=''
 	global doList
 	for c in cans:
 		cubeColor=cubeColor+c['bg'][0]	
@@ -111,7 +109,7 @@ def solco():
 	print(doList)
 
 texting=tk.Label(mainWin,textvariable=var,font=myfont,bg="#C0C0C0")
-texting.pack(side='bottom')
+# texting.pack(side='bottom')
 
 def convertForToList(f):
 	l=str(f).split(' ')
@@ -130,7 +128,7 @@ def rando():
 def rota():
 	global doList
 	str1 = ' '.join(str(e) for e in doList)
-	os.system('python testrotate.py "%s"' %(str1))
+	os.system('python rotest.py "%s"' %(str1))
 	print("~~~~~~~~~~~move complete ~~~~~~~~~~~")
 
 def solra():
@@ -142,21 +140,63 @@ def solra():
 	doList=convertForToList(solver.solve())
 	var.set(doList)
 
+def visual():
+	os.system('python3 colordetect.py')
+
+def sho():
+	fo = open("truecolor.txt")
+	cubeColor=fo.read().replace('\n','')
+	num=0
+	for c in cubeColor:
+		if(c=='r'):
+			cans[num].config(bg='red')
+		elif(c=='g'):
+			cans[num].config(bg='green')
+		elif(c=='b'):
+			cans[num].config(bg='blue')
+		elif(c=='y'):
+			cans[num].config(bg='yellow')
+		elif(c=='w'):
+			cans[num].config(bg='white')
+		elif(c=='o'):
+			cans[num].config(bg='orange')		
+		num=num+1
+
+def solvisual():
+	global doList
+	fo = open("truecolor.txt")
+	cubeColor=fo.read().replace('\n','')
+	doList=utils.solve(cubeColor,'Kociemba')
+	doList=list(map(str,doList))
+	var.set(doList)
+	print(doList)	
 
 
+
+vi = tk.Button(mainWin,text="Visual identification",font=myfont,command=visual)
+vi.pack(side='top')
 
 solcol = tk.Button(mainWin,text="solve color",font=myfont,command=solco)
-solcol.place(x=150,y=550)
+# solcol.place(x=150,y=550)
 
 ran=tk.Button(mainWin,text="random",font=myfont,command=rando)
-ran.place(x=450,y=550)
+# ran.place(x=450,y=550)
 solran = tk.Button(mainWin,text="solve random",font=myfont,command=solra)
-solran.place(x=650,y=550)
-
+# solran.place(x=650,y=550)
 rot=tk.Button(mainWin,text="rotate",font=myfont,command=rota)
+# rot.pack(side='bottom')
+
+show=tk.Button(mainWin,text="show",font=myfont,command=sho)
+show.pack(side='top')
+
+solvi=tk.Button(mainWin,text="solve",font=myfont,command=solvisual)
+solvi.pack(side='top')
+
+texting.pack(side='bottom')
 rot.pack(side='bottom')
-
-
+solran.pack(side='bottom',pady=20)
+ran.pack(side='bottom')
+solcol.pack(side='bottom',pady=47)
 
 # 步驟四： 進入事件處理迴圈。
 mainWin.mainloop()

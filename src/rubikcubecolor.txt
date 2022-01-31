@@ -1,0 +1,3 @@
+
+y,r,w,y,r,w,r,r,r
+w,r,r,r,r,b,r,r,r
