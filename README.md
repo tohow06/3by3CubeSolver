@@ -2,6 +2,8 @@
 
 A comprehensive Rubik's Cube solver application with visual recognition capabilities and a graphical user interface.
 
+[![IMAGE ALT TEXT HERE](media/cube_solver_wide.png)](https://youtu.be/7RalEq9f3NY)
+
 [Watch the demo video](https://youtu.be/7RalEq9f3NY)
 
 ## Overview
